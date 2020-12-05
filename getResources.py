@@ -18,7 +18,7 @@ def getHtmlContent(url):
     ]
     header = {"User-Agent": random.choice(user_agent)}
     try:
-        r = requests.get(url, headers=header, params={"Connection": "close"},timeout=13)
+        r = requests.get(url, headers=header, params={"Connection": "close"},timeout=9.01)
         html = r.text
         print("获取成功—> len(html)", len(html), end='\t')
         return html
@@ -54,12 +54,12 @@ def main():
     reslist = []
     linkRe = re.compile(
         r'(https://pan.baidu.com/s/.{23}|https:&amp;#47;&amp;#47;pan.baidu.com&amp;#47;s&amp;#47;.{23}|https:&#47;&#47;pan.baidu.com&#47;s&#47;.{23}|https：pan.baidu.com s ).*?(提取码: .{4}|提取码：.{4}|提取码:.{4})')  # 回头加入完整的
-    with open('fatherLink/realFatherLink.txt', 'r') as rFL:
+    with open('fatherLink/realFatherLink2.txt', 'r') as rFL:
         for rfl in rFL:
             url = rfl.replace('\n', '')
             html = getHtmlContent(url)
 
-            time.sleep(1.5)
+            time.sleep(1)
 
             getList(str(html), reslist, url, linkRe)
             if len(reslist) >= 100:
